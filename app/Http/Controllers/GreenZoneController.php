@@ -43,8 +43,6 @@ class GreenZoneController extends Controller
                 }
               }
 
-              dd($greenzones);
-
               return $greenzones;
     }
 
