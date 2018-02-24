@@ -6539,3 +6539,17 @@ body {
 .chartAir {
   padding: 0 15px;
   margin: 15px 0px; }
+
+.selctContainer {
+  position: absolute;
+  z-index: 1000;
+  top: 100px;
+  width: 80%;
+  left: 10%; }
+  .selctContainer select {
+    display: block;
+    border-radius: 28px;
+    padding: 10px; }
+
+.card-title {
+  font-size: 18px; }

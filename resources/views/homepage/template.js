@@ -4,27 +4,37 @@ var picture = require('../picture-card');
 
 module.exports = function (pictures) {
   var el = yo`<div class="mainInfo">
+    <div class="row selctContainer">
+        <select id="select">
+          <option value="CENTRO">Centro</option>
+          <option value="ARGANZUELA">Aganzuela</option>
+          <option value="RETIRO">Retiro</option>
+          <option value="SALAMANCA">Salamanca</option>
+          <option value="CHAMARTIN">Chamartin</option>
+          <option value="TETUAN">Tetuan</option>
+          <option value="CHAMBERI">Chamberi</option>
+          <option value="FUENCARRAL-EL PARDO">Fuencarral-El pardo</option>
+          <option value="MONCLOA-ARAVACA">Moncloa aravaca</option>
+          <option value="LATINA">Latina</option>
+          <option value="CARABANCHEL">Carabanchel</option>
+          <option value="USERA">Usera</option>
+          <option value="PUENTE DE VALLECAS">Puente de vallecas</option>
+          <option value="MORATALAZ">Moratalaz</option>
+          <option value="CIUDAD LINEAL">Ciudad lineal</option>
+          <option value="HORTALEZA">Hortaleza</option>
+          <option value="VILLAVERDE">Villaverde</option>
+          <option value="VILLA DE VALLECAS">Villa de vallecas</option>
+          <option value="VICALVARO">Vicalvaro</option>
+          <option value="SAN BLAS-CANILLEJAS">San blas-Canillejas</option>
+        </select>
+    </div>
     <div class="row mainInfoMap">
       <div class="col s12 offset-m1 l6 offset-l3 mainInfoMap">
         <div id="map"></div>
       </div>
     </div>
-    <div class="card">
-        <div class="card-image waves-effect waves-block waves-light">
-            <div class="chartAir">
-                <canvas id="myChart" width="150" height="150"></canvas>
-            </div>
-        </div>
-        <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4">Card Title <i class="fa fa-bars" aria-hidden="true"></i></span>
-          <p><a href="#">This is a link</a></p>
-        </div>
-        <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4">Card Title <i class="fa fa-times" aria-hidden="true"></i></span>
-          <p>Here is some more information about this product that is only revealed once clicked on.</p>
-        </div>
+    <div id="card-list">
     </div>
-
   </div>`;
 
   return layout(el);
