@@ -78,18 +78,18 @@ $districtCode = $stationsProcessed[$greenzoneNeighborhood];
           $thisCode = $airData[0] . $airData[1] . $airData[2];
           if (intval($thisCode) == intval($districtCode)) {
             return [
-              '00' => $airData[8],
-              '02' => $airData[12],
-              '04' => $airData[16],
-              '06' => $airData[20],
-              '08' => $airData[24],
-              '10' => $airData[28],
-              '12' => $airData[32],
-              '14' => $airData[36],
-              '16' => $airData[40],
-              '18' => $airData[44],
-              '20' => $airData[48],
-              '22' => $airData[52],
+              '00' => $airData[28],
+              '02' => $airData[32],
+              '04' => $airData[36],
+              '06' => $airData[40],
+              '08' => $airData[44],
+              '10' => $airData[48],
+              '12' => $airData[52],
+              '14' => $airData[8],
+              '16' => $airData[12],
+              '18' => $airData[16],
+              '20' => $airData[20],
+              '22' => $airData[24],
             ];
           }
       }
