@@ -32,12 +32,12 @@ class GreenZoneController extends Controller
                 if (isset($greenzoneInfo[3]) && isset($greenzoneInfo[4]) && isset($greenzoneInfo[5])) {
                 $greenzoneName = $this->sanitize($greenzoneInfo[4]);
                   if ($greenzoneNeighborhood == $neighborhoodName && !empty($greenzoneName) && !in_array($greenzoneName, $used)) {
-                    $greenzones[] = [
+                    $greenzones['greenzones'][] = [
                       'name' => ucwords(strtolower($greenzoneName)),
                       'street' =>$this->sanitize(ucwords(strtolower($greenzoneInfo[3]))),
                       'area' => $this->sanitize(ucwords(strtolower($greenzoneInfo[5]))),
                       'latitude' => isset($greenzoneInfo[6]) ? $greenzoneInfo[6] : '',
-                      'longitude' => isset($greenzoneInfo[7]) ? $greenzoneInfo[7] : '',
+                      'longitude' => isset($greenzoneInfo[7]) ? $greenzoneInfo[7] : ''
                     ];
 
                     $used[] = $greenzoneName;
@@ -45,11 +45,55 @@ class GreenZoneController extends Controller
                 }
               }
 
+              $greenzones['air'] = $this->getAirQuality($neighborhoodName);
+
               return $greenzones;
     }
 
-    private function sanitize($str) {
+    private function sanitize($str)
+    {
       return utf8_encode(trim($str));
     }
+
+    private function getAirQuality($greenzoneNeighborhood)
+    {
+      $stations = array_filter(explode('
+', file_get_contents('datasets/stations.csv')));
+
+$stationsProcessed = [];
+foreach ($stations as $station) {
+  $stationData = explode(';', $station);
+  $stationsProcessed[$stationData[0]] = $stationData[1];
+}
+
+$districtCode = $stationsProcessed[$greenzoneNeighborhood];
+
+      $csv = explode('
+', file_get_contents('datasets/air.csv'));
+
+      foreach ($csv as $airData) {
+        $airData = explode(',', $airData);
+
+        if (isset( $airData[0]) && isset( $airData[1]) && isset( $airData[2])) {
+          $thisCode = $airData[0] . $airData[1] . $airData[2];
+          if (intval($thisCode) == intval($districtCode)) {
+            return [
+              '00' => $airData[8],
+              '02' => $airData[12],
+              '04' => $airData[16],
+              '06' => $airData[20],
+              '08' => $airData[24],
+              '10' => $airData[28],
+              '12' => $airData[32],
+              '14' => $airData[36],
+              '16' => $airData[40],
+              '18' => $airData[44],
+              '20' => $airData[48],
+              '22' => $airData[52],
+            ];
+          }
+      }
+    }
+  }
 
 }

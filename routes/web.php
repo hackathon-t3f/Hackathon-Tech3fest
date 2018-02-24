@@ -26,9 +26,4 @@ $router->group(['prefix' => 'api'], function () use ($router) {
   */
   $router->get('greenzones/{neighborhoodName}', 'GreenZoneController@getGreenZonesByLocalization');
 
-  /**
-  * Get data by greenzone
-  */
-  $router->get('data/{greenzoneId}', 'DataController@getDataByGreenZone');
-
 });
