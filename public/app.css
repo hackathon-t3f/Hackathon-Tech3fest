@@ -6511,3 +6511,11 @@ body {
 
 .card.liked .fa-heart-o {
   display: none; }
+
+.avatar {
+  padding: 3px 0 0 0; }
+  .avatar img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    float: none; }

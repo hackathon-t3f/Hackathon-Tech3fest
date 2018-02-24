@@ -11,7 +11,7 @@ var el = yo`<nav class="header">
             </div>
             <div class="col s2 m6 push-s10 push-m10">
               <a href="#" class="btn btn-large btn-flat dropdown-button avatar" data-activates="drop-user">
-                <img src="1519467746857002.JPG"></i>
+                <img src="avatar.JPG"></i>
               </a>
               <ul id="drop-user" class="dropdown-content">
                 <li><a href="#">${translate.message('logout')}</a></li>
