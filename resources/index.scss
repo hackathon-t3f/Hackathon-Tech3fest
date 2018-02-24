@@ -66,8 +66,8 @@ body {
   border-bottom: 1px solid #edeeee;
 }
 
-.timeline {
-  padding: 30px 0;
+.mainInfo {
+  padding: 0 0;
 }
 
 $avatar-size: 48px;
@@ -128,4 +128,13 @@ $avatar-size: 48px;
         border-radius: 50%;
         float: none;
     }
+}
+
+#map {
+    height: calc(100vh - 55px);
+    width: 100%;
+}
+
+.mainInfoMap {
+    padding: 0 !important;
 }
