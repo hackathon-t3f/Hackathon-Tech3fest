@@ -6,7 +6,7 @@ var request = require('superagent');
 var header = require('../header');
 var axios = require('axios');
 
-page('/', header, function(ctx, next) {
+page('/', header, asyncLoad, function(ctx, next) {
     title('Platzigram - Signin');
     var main = document.getElementById('main-container');
     empty(main).appendChild(template());
@@ -19,13 +19,50 @@ window.initMap = function() {
     };
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
-        center: uluru
+        center: uluru,
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: true,
+        rotateControl: false,
+        fullscreenControl: false
     });
     var marker = new google.maps.Marker({
         position: uluru,
         map: map
     });
 }
+
+async function asyncLoad(ctx, next) {
+    try {
+        // ctx.pictures = await fetch('/api/pictures').then(res => res.json());
+        setTimeout(function() {
+            var context = document.getElementById("myChart").getContext('2d');
+            var myLineChart = new Chart(context, {
+                type: 'line',
+                data: {
+                    labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
+                    datasets: [{
+                        data: [8, 1, 1, 1, 3, 6, 5, 3, 5, 4],
+                        label: "Africa",
+                        borderColor: "#3e95cd",
+                        fill: false
+                    }]
+                },
+                options: {
+                    legend: {
+                        display: false
+                    },
+                    maintainAspectRatio: false,
+                }
+            });
+        }, 1000);
+        next();
+    } catch (err) {
+        return console.log(err);
+    }
+}
+
 
 //
 // function loadPictures(ctx, next) {
