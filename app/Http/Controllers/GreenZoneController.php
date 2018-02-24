@@ -52,6 +52,4 @@ class GreenZoneController extends Controller
       return utf8_encode(trim($str));
     }
 
-  }
-
 }
