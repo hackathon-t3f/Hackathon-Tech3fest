@@ -136,6 +136,7 @@ $avatar-size: 48px;
 }
 
 .card {
+    margin: 10px 10px;
     span {
         display: flex;
         align-items: center;
@@ -148,4 +149,9 @@ $avatar-size: 48px;
 
 .mainInfoMap {
     padding: 0 !important;
+}
+
+.chartAir{
+    padding: 0 15px;
+    margin: 15px 0px;
 }

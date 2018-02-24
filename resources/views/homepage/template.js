@@ -12,7 +12,7 @@ module.exports = function (pictures) {
     <div class="card">
         <div class="card-image waves-effect waves-block waves-light">
             <div class="chartAir">
-                <canvas class="chartAir" id="myChart" width="150" height="150"></canvas>
+                <canvas id="myChart" width="150" height="150"></canvas>
             </div>
         </div>
         <div class="card-content">
