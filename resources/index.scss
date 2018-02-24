@@ -135,6 +135,17 @@ $avatar-size: 48px;
     width: 100%;
 }
 
+.card {
+    span {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        i {
+            font-size: 15px;
+        }
+    }
+}
+
 .mainInfoMap {
     padding: 0 !important;
 }
