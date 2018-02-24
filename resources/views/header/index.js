@@ -7,11 +7,11 @@ var el = yo`<nav class="header">
         <div class="container">
           <div class="row">
             <div class="col s12 m6 offset-m1">
-              <a href="/" class="brand-logo platzigram">Platzigram</a>
+              <a href="/" class="brand-logo platzigram">SportMad</a>
             </div>
             <div class="col s2 m6 push-s10 push-m10">
-              <a href="#" class="btn btn-large btn-flat dropdown-button" data-activates="drop-user">
-                <i class="fa fa-user" aria-hidden="true"></i>
+              <a href="#" class="btn btn-large btn-flat dropdown-button avatar" data-activates="drop-user">
+                <img src="1519467746857002.JPG"></i>
               </a>
               <ul id="drop-user" class="dropdown-content">
                 <li><a href="#">${translate.message('logout')}</a></li>
@@ -27,4 +27,3 @@ module.exports = function header (ctx, next) {
   empty(container).appendChild(el);
   next();
 }
-
