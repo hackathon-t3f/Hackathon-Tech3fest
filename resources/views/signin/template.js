@@ -5,7 +5,7 @@ var translate = require('../translate');
 var signinForm = yo`<div class="col s12 m7">
   <div class="row">
     <div class="signup-box">
-      <h1 class="platzigram">Name of the app</h1>
+      <h1 class="platzigram">breeze</h1>
       <form class="signup-form" action="/">
         <div class="section">
           <a class="btn btn-fb hide-on-small-only">Entar con facebook</a>

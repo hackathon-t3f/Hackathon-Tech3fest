@@ -7,7 +7,7 @@ var header = require('../header');
 var axios = require('axios');
 
 page('/', header, asyncLoad, function(ctx, next) {
-    title('Platzigram - Signin');
+    title('breeze');
     var main = document.getElementById('main-container');
     empty(main).appendChild(template());
 });
@@ -33,17 +33,18 @@ window.initMap = function() {
     });
 }
 
-function addGraph(data, index) {
+function addGraph(data) {
+    var dataArray = Object.keys(data);
     empty(document.getElementById('chartMain'));
     $("#chartMain").append('<div class="card-panel" style="margin: 10px 10px; padding: 10px"><div id="chartContent"><canvas id="myChart" width="150" height="150"></canvas></div></div>')
     var context = document.getElementById("myChart").getContext('2d');
     var myLineChart = new Chart(context, {
         type: 'line',
         data: {
-            labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
+            labels: ['00', '02', '04', '06', '08', '10', '12', '14', '16', '18', '20', '22'],
             datasets: [{
-                data: data,
-                label: "Africa",
+                data: dataArray,
+                label: "Madrid",
                 borderColor: "#3e95cd",
                 fill: false
             }]
@@ -68,12 +69,12 @@ async function asyncLoad(ctx, next) {
                     str = $(this).valueOf()[0].value;
                 });
 
-                addGraph([8, 1, 1, 1, 3, 6, 5, 3, 5, 4])
 
                 $.get("api/greenzones/" + str, function(data) {
+                    addGraph(data.air)
                     empty(document.getElementById('card-list'));
                     var bounds = new google.maps.LatLngBounds();
-                    if (data[0].latitude) {
+                    if (data.greenzones[0].latitude) {
                         if (window.markers) {
                             markers.forEach(function(itemMarker) {
                                 itemMarker.setMap(null);
@@ -83,7 +84,7 @@ async function asyncLoad(ctx, next) {
                             window.markers = [];
                         }
                     }
-                    data.forEach(function(item, index) {
+                    data.greenzones.forEach(function(item, index) {
                         $("#card-list").append(`<div class="card">
                             <div class="card-content">
                               <span class="card-title activator grey-text text-darken-4">${item.name} <i class="fa fa-bars" aria-hidden="true"></i></span>

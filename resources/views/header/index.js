@@ -7,7 +7,7 @@ var el = yo`<nav class="header">
         <div class="container">
           <div class="row">
             <div class="col s12 m6 offset-m1">
-              <a href="/" class="brand-logo platzigram">SportMad</a>
+              <a href="/" class="brand-logo platzigram">breeze</a>
             </div>
             <div class="col s2 m6 push-s10 push-m10">
               <a href="#" class="btn btn-large btn-flat dropdown-button avatar" data-activates="drop-user">
