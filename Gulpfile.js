@@ -70,4 +70,6 @@ gulp.task('build', function () {
 
 gulp.task('watch', function () { return compile(true); });
 
-gulp.task('default', ['styles', 'assets', 'build', 'pug', 'webserver']);
+gulp.task('default', ['styles', 'assets', 'build', 'pug', 'webserver', 'watch']);
+
+gulp.task('server', ['styles', 'assets', 'build', 'pug'])
