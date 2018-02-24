@@ -1,5 +1,5 @@
 applications:
-- path: ./public
+- path: .
   memory: 256M
   instances: 1
   domain: eu-gb.mybluemix.net
