@@ -14,11 +14,11 @@ page('/', header, asyncLoad, function(ctx, next) {
 
 window.initMap = function() {
     var uluru = {
-        lat: 40.3488673,
-        lng: -3.6968806
+        lat: 40.4169335,
+        lng: -3.7083759
     };
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 15,
+    window.myMap = new google.maps.Map(document.getElementById('map'), {
+        zoom: 18,
         center: uluru,
         zoomControl: true,
         mapTypeControl: false,
@@ -33,8 +33,10 @@ window.initMap = function() {
     });
 }
 
-function addGraph(data, index){
-    var context = document.getElementById("myChart" + index).getContext('2d');
+function addGraph(data, index) {
+    empty(document.getElementById('chartMain'));
+    $("#chartMain").append('<div class="card-panel" style="margin: 10px 10px; padding: 10px"><div id="chartContent"><canvas id="myChart" width="150" height="150"></canvas></div></div>')
+    var context = document.getElementById("myChart").getContext('2d');
     var myLineChart = new Chart(context, {
         type: 'line',
         data: {
@@ -60,20 +62,29 @@ async function asyncLoad(ctx, next) {
         // ctx.pictures = await fetch('/api/pictures').then(res => res.json());
         setTimeout(function() {
 
-            $( "#select" ).change(function() {
+            $("#select").change(function() {
                 var str = "";
-                $( "select option:selected" ).each(function() {
-                    debugger
-                  str = $( this ).valueOf()[0].value;
+                $("select option:selected").each(function() {
+                    str = $(this).valueOf()[0].value;
                 });
-                $.get( "api/greenzones/" + str, function( data ) {
-                    data.forEach(function(item, index){
-                        $( "#card-list" ).append( `<div class="card">
-                            <div class="card-image waves-effect waves-block waves-light">
-                                <div class="chartAir">
-                                    <canvas id="myChart${index}" width="150" height="150"></canvas>
-                                </div>
-                            </div>
+
+                addGraph([8, 1, 1, 1, 3, 6, 5, 3, 5, 4])
+
+                $.get("api/greenzones/" + str, function(data) {
+                    empty(document.getElementById('card-list'));
+                    var bounds = new google.maps.LatLngBounds();
+                    if (data[0].latitude) {
+                        if (window.markers) {
+                            markers.forEach(function(itemMarker) {
+                                itemMarker.setMap(null);
+                            });
+                            markers = [];
+                        } else {
+                            window.markers = [];
+                        }
+                    }
+                    data.forEach(function(item, index) {
+                        $("#card-list").append(`<div class="card">
                             <div class="card-content">
                               <span class="card-title activator grey-text text-darken-4">${item.name} <i class="fa fa-bars" aria-hidden="true"></i></span>
                               <p><a href="#">${item.street}</a></p>
@@ -82,9 +93,20 @@ async function asyncLoad(ctx, next) {
                               <span class="card-title grey-text text-darken-4">Card Title <i class="fa fa-times" aria-hidden="true"></i></span>
                               <p>Here is some more information about this product that is only revealed once clicked on.</p>
                             </div>
-                        </div>` );
-                        addGraph([8, 1, 1, 1, 3, 6, 5, 3, 5, 4], index)
+                        </div>`);
+                        if (item.latitude) {
+                            var myLatlng = new google.maps.LatLng(item.latitude, item.longitude);
+                            var marker = new google.maps.Marker({
+                                position: myLatlng,
+                                title: item.name,
+                                icon: 'runner_opt.png'
+                            });
+                            markers.push(marker);
+                            marker.setMap(myMap);
+                            bounds.extend(myLatlng);
+                        }
                     });
+                    myMap.fitBounds(bounds);
                 });
             });
         }, 1000);

@@ -6,8 +6,9 @@ module.exports = function (pictures) {
   var el = yo`<div class="mainInfo">
     <div class="row selctContainer">
         <select id="select">
+          <option value="NULL">Selecciona tu barrio</option>
           <option value="CENTRO">Centro</option>
-          <option value="ARGANZUELA">Aganzuela</option>
+          <option value="ARGANZUELA">Arganzuela</option>
           <option value="RETIRO">Retiro</option>
           <option value="SALAMANCA">Salamanca</option>
           <option value="CHAMARTIN">Chamartin</option>
@@ -33,6 +34,8 @@ module.exports = function (pictures) {
         <div id="map"></div>
       </div>
     </div>
+    <div id="chartMain"></div>
+
     <div id="card-list">
     </div>
   </div>`;
