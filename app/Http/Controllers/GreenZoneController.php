@@ -27,15 +27,17 @@ class GreenZoneController extends Controller
               $used = [];
 
               foreach ($csv as $greenzone) {
-                $greenzoneInfo = explode(';', $greenzone);
+                $greenzoneInfo = explode(',', $greenzone);
                 $greenzoneNeighborhood = $this->sanitize($greenzoneInfo[0]);
                 if (isset($greenzoneInfo[3]) && isset($greenzoneInfo[4]) && isset($greenzoneInfo[5])) {
                 $greenzoneName = $this->sanitize($greenzoneInfo[4]);
                   if ($greenzoneNeighborhood == $neighborhoodName && !empty($greenzoneName) && !in_array($greenzoneName, $used)) {
                     $greenzones[] = [
-                      'name' => $greenzoneName,
-                      'street' =>$this->sanitize($greenzoneInfo[3]),
-                      'area' => $this->sanitize($greenzoneInfo[5])
+                      'name' => ucwords(strtolower($greenzoneName)),
+                      'street' =>$this->sanitize(ucwords(strtolower($greenzoneInfo[3]))),
+                      'area' => $this->sanitize(ucwords(strtolower($greenzoneInfo[5]))),
+                      'latitude' => isset($greenzoneInfo[6]) ? $greenzoneInfo[6] : '',
+                      'longitude' => isset($greenzoneInfo[7]) ? $greenzoneInfo[7] : '',
                     ];
 
                     $used[] = $greenzoneName;
