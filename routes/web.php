@@ -14,48 +14,21 @@ use Illuminate\Http\Request;
 |
 */
 
-$router->get('/', function () use ($router) {
-    return 'Welcome to the Hackathon Project API!';
-});
+$router->group(['prefix' => 'api'], function () use ($router) {
 
-/**
-* Get all todos
-*/
-$router->get('todos', function()
-{
-    $todos = Todo::orderBy('created_at', 'DESC')->paginate(5)->toArray();
-    $remaining = Todo::where('completed', 0)->count();
-    return ['todos' => $todos, 'remaining' => $remaining];
-});
-/**
-* Create todo
-*/
-$router->post('add-todo', function(Request $request)
-{
-    Todo::create($request->all());
-});
-/**
-* Delete todo
-*/
-$router->post('todos/delete/{id}', function($id)
-{
-    Todo::destroy($id);
-});
-/**
-* Complete todo
-*/
-$router->post('todos/complete/{id}/{completed}', function($id, $completed)
-{
-    Todo::where('id', $id)->update(['completed' => $completed]);
-});
-/**
-* Update todo
-*/
-$router->post('update/{id}', function(Request $request, $id)
-{
-    Todo::where('id', $id)->update([
-        'name' => $request->input('name'),
-        'description' => $request->input('description'),
-        'completed' => $request->input('completed')
-    ]);
+  /**
+  * Get all neighborhoods
+  */
+  $router->get('/neighborhoods', 'NeighborhoodController@getNeighborhoods');
+
+  /**
+  * Get all greenzone near localization
+  */
+  $router->get('greenzones/{lat}/{lon}', 'GreenZoneController@getGreenZonesByLocalization');
+
+  /**
+  * Get data by greenzone
+  */
+  $router->get('data/{greenzoneId}', 'DataController@getDataByGreenZone');
+
 });
